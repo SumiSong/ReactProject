@@ -6,14 +6,14 @@ import style from '../../component/Component.css';
 
 function Home() {
     return (
-        <div>
+        <div className={style.wrapper}>
             <div className={style.container}>
-            <UserInfo />
-            <NavbarComponent />
-            <div className={style.content}>
-                <Outlet />
+                <UserInfo />
+                <NavbarComponent />
+                <div className={style.content}>
+                    <Outlet />
+                </div>
             </div>
-        </div>
         </div>
     );
 }

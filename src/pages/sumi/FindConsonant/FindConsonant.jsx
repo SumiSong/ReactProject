@@ -17,16 +17,20 @@ function FindConsonant() {
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
-        <div className='container' style={style.container}>
-            {currentProblem && (
-                <ProblemHeader number={currentProblem.number} description={currentProblem.question} />
-            )}
-            <Pagination
-                totalProblems={problemList.length}
-                problemsPerPage={problemsPerPage}
-                currentPage={currentPage}
-                paginate={paginate}
-            />
+        <div className={style.wrapper}>
+            <div className='container' style={style.container}>
+                {currentProblem && (
+                    <ProblemHeader number={currentProblem.number} description={currentProblem.question} />
+                )}
+            </div>
+            <div className='pagination' style={style.Pagination}>
+                <Pagination
+                    totalProblems={problemList.length}
+                    problemsPerPage={problemsPerPage}
+                    currentPage={currentPage}
+                    paginate={paginate}
+                />
+            </div>
         </div>
     );
 }

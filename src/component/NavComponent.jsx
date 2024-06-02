@@ -4,14 +4,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const NavbarComponent = () => {
     return (
-        <Navbar bg="light" expand="lg">
-                <Nav className="mr-auto">
-                    <Nav.Link href="/seongyu">선규</Nav.Link>
-                    <Nav.Link href="/sumi">수미</Nav.Link>
-                    <Nav.Link href="/kichan">기찬</Nav.Link>
-                    <Nav.Link href="/mingi">민기</Nav.Link>
-                </Nav>
-        </Navbar>
+            <Nav justify variant="tabs" defaultActiveKey="/home">
+            <Nav.Item>
+                <Nav.Link href="/seongyu">Quiz1</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link href="/sumi">Quiz2</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link href="/kichan">Quiz3</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link href="/mingi">Quiz4</Nav.Link>
+            </Nav.Item>
+            </Nav>
     );
 };
 

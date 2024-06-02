@@ -6,7 +6,7 @@ import FindConsonant from './pages/sumi/FindConsonant/FindConsonant'
 function App() {
   return (
       <Routes>
-          <Route path="/"element={<Home />}>
+          <Route path="/" element={<Home />}>
           <Route path="/seongyu" element={<div>Seongyu Component</div>} />
           <Route path="/sumi" element={<FindConsonant />} />
           </Route>

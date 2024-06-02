@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ProblemHeader from '../component/ProblemHeader';
 import problemList from '../component/problemList'; // 문제 리스트 임포트
 import Pagination  from  '../../../component/Pagination';
+import style from '../../../component/Component.css';
 
 function FindConsonant() {
     const [currentPage, setCurrentPage] = useState(1);
@@ -16,7 +17,7 @@ function FindConsonant() {
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
-        <div>
+        <div className='container' style={style.container}>
             {currentProblem && (
                 <ProblemHeader number={currentProblem.number} description={currentProblem.question} />
             )}

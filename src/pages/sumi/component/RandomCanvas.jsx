@@ -1,30 +1,40 @@
-import react, {useEffect, useState, useRef} from 'react';
-import './FindConsonant.css'
+import React, { useEffect, useRef, useState } from 'react';
+import './RandomCanvas.css';
 
-const FindConsonantInfo = ({imageSrc}) => {
+const RandomCanvas = ({ items, imageSrc, canvasWidth = 600, canvasHeight = 400, itemType }) => {
     const canvasRef = useRef(null);
     const [isDrawing, setIsDrawing] = useState(false);
     const [context, setContext] = useState(null);
-    const [shuffledConsonants, setShuffledConsonants] = useState([]);
-    const consonants = [
-        'ㄱ', 'ㄴ', 'ㄷ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅅ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
-    ];
-    
+    const [shuffledItems, setShuffledItems] = useState([]);
+
     useEffect(() => {
-        const generateRandomConsonants = (num) => {
+        const generateRandomItems = (num) => {
             const shuffled = [];
             for (let i = 0; i < num; i++) {
-                const randomIndex = Math.floor(Math.random() * consonants.length);
-                shuffled.push(consonants[randomIndex]);
+                const randomIndex = Math.floor(Math.random() * items.length);
+                shuffled.push(items[randomIndex]);
             }
             return shuffled;
         };
 
-        const shuffled = generateRandomConsonants(24);
-        setShuffledConsonants(shuffled);
+        const shuffleArray = (array) => {
+            let shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        };
 
-        
-    }, []);
+        if (itemType === 'consonant') {
+            const shuffled = generateRandomItems(24);
+            setShuffledItems(shuffled);
+        } else if (itemType === 'words') {
+            const shuffled = shuffleArray(items);
+            setShuffledItems(shuffled);
+        }
+
+    }, [items, itemType]);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -32,11 +42,11 @@ const FindConsonantInfo = ({imageSrc}) => {
         const img = new Image();
         img.src = imageSrc;
         img.onload = () => {
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight);
         };
 
         setContext(ctx);
-    }, [imageSrc]);
+    }, [imageSrc, canvasWidth, canvasHeight]);
 
     const handleMouseDown = () => {
         setIsDrawing(true);
@@ -65,19 +75,19 @@ const FindConsonantInfo = ({imageSrc}) => {
     };
 
     return (
-        <div className="consonant-info">
+        <div className="random-canvas">
             <canvas
                 ref={canvasRef}
                 className="drawing-canvas"
-                width={600}
-                height={400}
+                width={canvasWidth}
+                height={canvasHeight}
                 onMouseDown={handleMouseDown}
                 onMouseUp={handleMouseUp}
                 onMouseMove={handleMouseMove}
             />
-            <div className="consonants">
-                {shuffledConsonants.map((item, index) => (
-                    <span key={index} className="consonant">
+            <div className={`items-${itemType}`}>
+                {shuffledItems.map((item, index) => (
+                    <span key={index} className="item consonant">
                         {item}
                     </span>
                 ))}
@@ -86,4 +96,4 @@ const FindConsonantInfo = ({imageSrc}) => {
     );
 };
 
-export default FindConsonantInfo;
+export default RandomCanvas;

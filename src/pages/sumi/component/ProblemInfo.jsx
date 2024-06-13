@@ -1,11 +1,12 @@
 import React from 'react';
-import FindConsonantInfo from '../FindConsonant/FindConsonantInfo';
+// import FindConsonantInfo from '../FindConsonant/FindConsonantInfo';
+import RandomCanvas from './RandomCanvas';
 
-function ProblemInfo({ imageSrc}) {
+function ProblemInfo({ imageSrc, items, itemType }) {
     return (
         <div>
             <div className='problem-info'>
-            <FindConsonantInfo imageSrc={imageSrc} />
+            <RandomCanvas imageSrc={imageSrc} items={items} itemType={itemType}/>
             </div>
         </div>
     );

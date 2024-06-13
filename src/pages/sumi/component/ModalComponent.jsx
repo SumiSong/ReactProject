@@ -11,7 +11,7 @@ function ModalComponent({ show, handleClose, result }) {
                 <Modal.Title>결과</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <p>{result}</p>
+            <pre style={{ whiteSpace: 'pre-wrap' }}>{result}</pre>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>다시 풀기</Button>

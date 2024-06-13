@@ -1,35 +1,50 @@
 import React, { useState } from 'react';
 import ProblemHeader from '../component/ProblemHeader';
 import problemList from '../component/problemList'; // 문제 리스트 임포트
-import Pagination  from  '../../../component/Pagination';
 import style from '../../../component/Component.css';
+import ProblemInfo from '../component/ProblemInfo';
+import QuestionAnswer from '../component/QuestionAnswer';
+import questionList from '../component/QuestionList';
+import CheckResult from './CheckResult';
+import ModalComponent from '../component/ModalComponent'
 
 function FindConsonant() {
-    const [currentPage, setCurrentPage] = useState(1);
-    const problemsPerPage = 1;
+    const [answers, setAnswers] = useState({ 'ㄷ': '', 'ㄹ': '', 'ㅂ': '', 'ㅍ': '' });
+    const [submitted, setSubmitted] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [result, setResult] = useState('');
 
-    // 현재 페이지에 해당하는 문제 계산
-    const indexOfLastProblem = currentPage * problemsPerPage;
-    const indexOfFirstProblem = indexOfLastProblem - problemsPerPage;
-    const currentProblem = problemList[indexOfFirstProblem]; // 현재 문제 가져오기
+    const handleAnswersChange = (newAnswers) => {
+        setAnswers(newAnswers);
+    };
 
-    //paginate 함수는 페이지 번호를 인수로 받아 currentPage 상태를 업데이트. 이 함수는 페이지 번호를 클릭했을 때 호출
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const handleSubmit = () => {
+        setSubmitted(true);
+    };
+
+    const handleResult = (result) => {
+        setResult(result);
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        setSubmitted(false);
+    };
 
     return (
         <div className={style.wrapper}>
             <div className='container' style={style.container}>
-                {currentProblem && (
-                    <ProblemHeader number={currentProblem.number} description={currentProblem.question} />
-                )}
-            </div>
-            <div className='pagination' style={style.Pagination}>
-                <Pagination
-                    totalProblems={problemList.length}
-                    problemsPerPage={problemsPerPage}
-                    currentPage={currentPage}
-                    paginate={paginate}
+                <ProblemHeader number={problemList.problem1.number} description={problemList.problem1.description} />
+                <ProblemInfo imageSrc={problemList.problem1.imageSrc} />
+                <QuestionAnswer 
+                    problemSetKey={questionList.problem1.questions} 
+                    onAnswersChange={handleAnswersChange} 
+                    onSubmit={handleSubmit}
                 />
+                {submitted && <CheckResult answers={answers} setResult={handleResult}/>}
+                <ModalComponent show={showModal} handleClose={handleCloseModal} result={result} />
+
             </div>
         </div>
     );

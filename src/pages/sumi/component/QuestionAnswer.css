@@ -1,0 +1,42 @@
+.question-answer {
+    width: 100%;
+    max-width: 100%; /* ProblemInfo의 크기와 맞춤 */
+    margin-top: 20px;
+    justify-content: center;
+    /* border: 3px solid green; */
+
+}
+
+.question-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* 각 셀의 너비를 고정 */
+    justify-content: center;
+}
+
+.question-item {
+    border-bottom: 3px solid black;
+    
+}
+
+.question {
+    width: 50%; /* 질문의 고정된 너비 */
+    padding: 10px;
+    text-align: center;
+    border: 3px solid black;
+}
+
+.answer {
+    padding: 10px;
+    border: 3px solid black;
+}
+
+.answer .input-text {
+    width: 100%;
+
+}
+
+.submit-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+}
